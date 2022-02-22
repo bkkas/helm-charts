@@ -49,6 +49,10 @@ resources:
 
 replicaCount: 1
 
+# The name of the certificate used on the listener on the application gateway
+# This certificate and listener is not created by this chart
+applicationGatewayCertName: cert-appgw-listener
+
 ingress:
 #  host: your.hostname.io
 #  http:
