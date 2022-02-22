@@ -1,0 +1,14 @@
+apiVersion: v1
+entries:
+  app:
+  - apiVersion: v2
+    appVersion: 1.0.0
+    created: "2022-02-22T08:40:29.504300474Z"
+    description: A Helm chart for Kubernetes
+    digest: 7cd405b95cb5486bfd54d25cf647913d6a741be687707848d8507ab3dfd0857a
+    name: app
+    type: application
+    urls:
+    - https://github.com/bkkas/helm-charts/releases/download/app-0.5.2/app-0.5.2.tgz
+    version: 0.5.2
+generated: "2022-02-22T08:40:29.504307274Z"
