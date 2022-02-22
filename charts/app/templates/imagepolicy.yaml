@@ -1,0 +1,16 @@
+{{- if .Values.image.update.enabled }}
+apiVersion: image.toolkit.fluxcd.io/v1beta1
+kind: ImagePolicy
+metadata:
+  name: {{ .Values.name }}
+  namespace: {{ .Values.namespace }}
+spec:
+  imageRepositoryRef:
+    name: {{ .Values.name }}
+  {{- if .Values.image.update.filterTags }}
+  filterTags: {{- toYaml .Values.image.update.filterTags | nindent 4}}
+  {{- end }}
+  {{- if .Values.image.update.policy }}
+  policy: {{- toYaml .Values.image.update.policy | nindent 4}}
+  {{- end }}
+{{- end }}

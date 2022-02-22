@@ -1,0 +1,29 @@
+{{- if .Values.ingress }}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Values.name }}
+  namespace: {{ .Values.namespace }}
+  annotations:
+    kubernetes.io/ingress.class: azure/application-gateway
+    #appgw.ingress.kubernetes.io/appgw-ssl-certificate: cert-httpsapp-dev-apps-eviny-io
+    appgw.ingress.kubernetes.io/ssl-redirect: "true"
+    appgw.ingress.kubernetes.io/backend-path-prefix: "/"
+    appgw.ingress.kubernetes.io/override-frontend-port: "443"
+spec:
+  rules:
+  {{- with .Values.ingress }}
+  - host: {{ .host }}
+    http:
+      paths:
+      {{- range .http }}
+      - path: {{ .path }}
+        pathType: {{ .pathType | title }}
+        backend:
+          service:
+            name: {{ $.Values.name }}
+            port:
+              number: {{ .port }}
+      {{- end }}
+  {{- end }}
+{{- end }}
