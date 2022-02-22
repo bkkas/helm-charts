@@ -20,7 +20,7 @@ ports:
 #    targetPort: 80
 
 image:
-  repository: "nginx"
+  repository: "ubuntu"
   tag: latest
   pullPolicy: IfNotPresent
   # Flux Image policy & repository  
