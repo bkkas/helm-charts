@@ -19,6 +19,12 @@ ports:
 #    port: 80
 #    targetPort: 80
 
+envVars:
+#  - name: ENV1
+#    value: ENV1-VALUE
+#  - name: ENV2
+#    value: ENV2-VALUE
+
 image:
   repository: "ubuntu"
   tag: latest
