@@ -60,12 +60,45 @@ replicaCount: 1
 applicationGatewayCertName: cert-appgw-listener
 
 ingress:
-#  host: your.hostname.io
-#  http:
-#    - path: /app/*
-#      pathType: prefix
-#      port:  80
+  enabled: false
+  host: your.hostname.io
+  http:
+    - path: /app/*
+      pathType: prefix
+      port:  80
 
+# Prerequisites:
+# - Create User Assigned Identity for your app and give it appropriate permissions.
+aadpodidentity:
+  enabled: false
+  # 0 = User Assigned Managed Identity, 1 = Service Principal with client secret, 2 = Service Principal with certificate
+  type: 0 
+  # Resource ID for the Managed Identity (az identity show --name <name> --resource-group <resource-group> --query id)
+  resourceID: /subscriptions/<subscription id>/resourceGroups/<resource-group id>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/<mi-name>
+  # Client ID for the Managed Identity (az identity show --name <name> --resource-group <resource-group> --query clientId)
+  clientID: 00000000-0000-0000-0000-000000000000
+
+  # Azure Key Vault CSI-driver
+  # Needs AAD Pod Identity
+  akvcsidriver:
+    enabled: false
+    provider: azure
+    usePodIdentity: true               # Set to true for using aad-pod-identity to access your key vault
+    keyvaultName: your-key-vault-name  # Set to the name of your key vault
+    cloudName: AzurePublicCloud        # [OPTIONAL for Azure] if not provided, the Azure environment defaults to AzurePublicCloud
+    tenantId: your-tenant-id           # The tenant ID of the key vault
+    objects: |
+      array:
+        - |
+          objectName: secret1
+          objectType: secret
+        - |
+          objectName: key1
+          objectType: key
+        - |
+          objectName: cert1
+          objectType: cert
+    
 healthEndpoint: /health
 healthPort: 80
 
