@@ -1,0 +1,10 @@
+{{- if .Values.aadpodidentity.enabled }}
+apiVersion: aadpodidentity.k8s.io/v1
+kind: AzureIdentityBinding
+metadata:
+  name: "{{ .Values.name }}-binding"
+  namespace: {{ .Values.namespace }}
+spec:
+  azureIdentity: "{{ .Values.name }}-identity"
+  selector: "{{ .Values.name }}-identity"
+{{- end }}

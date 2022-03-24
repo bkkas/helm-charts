@@ -1,0 +1,13 @@
+{{- if .Values.aadpodidentity.enabled }}
+apiVersion: aadpodidentity.k8s.io/v1
+kind: AzureIdentity
+metadata:
+  name: "{{ .Values.name }}-identity"
+  namespace: {{ .Values.namespace }}
+spec:
+  {{- with .Values.aadpodidentity }}
+  type: {{ .type }}
+  resourceID: {{ .resourceID | quote }}
+  clientID: {{ .clientID | quote }}
+  {{- end }}
+{{- end }}

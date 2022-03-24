@@ -26,7 +26,19 @@ spec:
     metadata:
       labels:
         app: {{ .Values.name }}
+        {{- if .Values.aadpodidentity.enabled }}
+        aadpodidbinding: "{{ .Values.name }}-identity"
+        {{- end }}
     spec:
+      {{- if .Values.aadpodidentity.akvcsidriver.enabled }}
+      volumes:
+        - name: secrets-store
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: "{{ .Values.name }}-akvcsistore"
+      {{- end }}
       containers:
       - name: {{ default (printf "%s-%s" .Values.namespace .Values.name) .Values.containerName | quote }}
         image: {{ printf "%s:%s" .Values.image.repository .Values.image.tag | quote }}
@@ -58,6 +70,13 @@ spec:
           - name: {{ .name | quote }}
             value: {{ .value | quote }}
           {{- end }}
+        {{- end }}
+
+        {{- if .Values.aadpodidentity.akvcsidriver.enabled }}
+        volumeMounts:
+          - name: secrets-store
+            mountPath: "/mnt/secrets-store"
+            readOnly: true
         {{- end }}
 
         livenessProbe:
