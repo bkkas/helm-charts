@@ -19,12 +19,6 @@ ports:
 #    port: 80
 #    targetPort: 80
 
-envVars:
-#  - name: ENV1
-#    value: ENV1-VALUE
-#  - name: ENV2
-#    value: ENV2-VALUE
-
 image:
   repository: "ubuntu"
   tag: latest
@@ -87,17 +81,72 @@ aadpodidentity:
     keyvaultName: your-key-vault-name  # Set to the name of your key vault
     cloudName: AzurePublicCloud        # [OPTIONAL for Azure] if not provided, the Azure environment defaults to AzurePublicCloud
     tenantId: your-tenant-id           # The tenant ID of the key vault
-    objects: |
-      array:
-        - |
-          objectName: secret1
-          objectType: secret
-        - |
-          objectName: key1
-          objectType: key
-        - |
-          objectName: cert1
-          objectType: cert
+    
+    # These MUST reflect the objects in the array below. objectName = objectName in the array.
+    # This will use the mounted secrets and create k8s secrets which you can use for environment variables.
+    # You can create multiple secret objects in one secret.
+    secretObjects:
+      #- secretName: app-key1
+      #  objectName: key1
+      #  key: secret-key-name
+      #  type: Opaque
+      #- secretName: app-key1
+      #  objectName: key2
+      #  key: secret-key-name
+      #  type: Opaque
+      #- secretName: app-key2
+      #  objectName: key3
+      #  key: secret-key-name
+      #  type: Opaque
+      #- secretName: app-secret1
+      #  objectName: secret1
+      #  key: tls-key
+      #  type: kubernetes.io/tls
+      #- secretName: app-secret1
+      #  objectName: secret2
+      #  key: tls-key
+      #  type: kubernetes.io/tls
+      #- secretName: app-secret2
+      #  objectName: secret3
+      #  key: tls-key
+      #  type: kubernetes.io/tls
+      #- secretName: app-pem-cert
+      #  objectName: cert1
+      #  key: tls-key
+      #  type: kubernetes.io/tls
+    objects: #|
+      #array:
+      #  - |
+      #    objectName: secret1
+      #    objectType: secret
+      #  - |
+      #    objectName: secret2
+      #    objectType: secret
+      #  - |
+      #    objectName: secret3
+      #    objectType: secret
+      #  - |
+      #    objectName: key1
+      #    objectType: key
+      #  - |
+      #    objectName: key2
+      #    objectType: key
+      #  - |
+      #    objectName: key3
+      #    objectType: key
+      #  - |
+      #    objectName: cert1
+      #    objectType: cert
+
+envVars:
+  #- name: ENV1
+  #  value: ENV1-VALUE
+  #- name: ENV2
+  #  valueFrom:
+  #    secretKeyRef:
+  #      name: app-secret1
+  #      key: tls-key
+
     
 healthEndpoint: /health
 healthPort: 80

@@ -67,8 +67,16 @@ spec:
         {{- if .Values.envVars }}
         env:
           {{- range .Values.envVars }}
+          {{- if .value }}
           - name: {{ .name | quote }}
             value: {{ .value | quote }}
+          {{- else }}
+          - name: {{ .name | quote }}
+            valueFrom:
+              secretKeyRef:
+                name: {{ .valueFrom.secretKeyRef.name | quote }}
+                key: {{ .valueFrom.secretKeyRef.key | quote }}
+          {{- end }}
           {{- end }}
         {{- end }}
 
