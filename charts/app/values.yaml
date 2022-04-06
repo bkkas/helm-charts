@@ -1,8 +1,8 @@
-# -- Namespace the application will be deployed in
-namespace: app
+# -- (REQUIRED) The namespace the application will be deployed in
+namespace: app-namespace
 
-# -- Name your application
-name: app
+# -- (REQUIRED) Name your application
+name: app-name
 
 # -- By default `containerName` will be equal to `{{ .Values.namespace }}-{{.Values.name }}`
 containerName:
@@ -12,22 +12,27 @@ ports:
 #    port: 80
 #    targetPort: 80
 
+# -- (REQUIRED) Set health endpoint
 healthEndpoint: /health
+# -- (REQUIRED) Set health port
 healthPort: 80
 
+# -- (REQUIRED) Set ready endpoint
 readyEndpoint: /health
+# -- (REQUIRED) Set ready port
 readyPort: 80
 
 image:
-  # -- Image repository
+  # (REQUIRED) -- Image repository
   repository: "ubuntu"
-  # -- Image version
+  # (REQUIRED) -- Image version
   tag: latest
   # -- Always, IfNotPresent or Never
   pullPolicy: IfNotPresent
   # -- Flux Image policy & repository  
   update:
-    enabled: true
+    # -- (REQUIRED) Enable or disable Flux Image policy
+    enabled: false
     # -- Image repository - https://fluxcd.io/docs/components/image/imagerepositories/
     interval: 1m0s
     # -- Image policy - https://fluxcd.io/docs/components/image/imagepolicies/
