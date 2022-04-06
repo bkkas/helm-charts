@@ -22,12 +22,13 @@ A Helm chart for Kubernetes
 | aadpodidentity.type | int | `0` | 0 = User Assigned Managed Identity, 1 = Service Principal with client secret, 2 = Service Principal with certificate |
 | containerName | string | `nil` | By default `containerName` will be equal to `{{ .Values.namespace }}-{{.Values.name }}` |
 | envVars | string | `nil` |  |
-| healthEndpoint | string | `"/health"` |  |
-| healthPort | int | `80` |  |
+| healthEndpoint | string | `"/health"` | (REQUIRED) Set health endpoint |
+| healthPort | int | `80` | (REQUIRED) Set health port |
 | image.pullPolicy | string | `"IfNotPresent"` | Always, IfNotPresent or Never |
-| image.repository | string | `"ubuntu"` | Image repository |
-| image.tag | string | `"latest"` | Image version |
-| image.update | object | `{"enabled":true,"filterTags":{"extract":"$ts","pattern":"^dev-[a-fA-F0-9]+-(?P<ts>.*)"},"interval":"1m0s","policy":{"numerical":{"order":"asc"}}}` | Flux Image policy & repository   |
+| image.repository | string | `"ubuntu"` |  |
+| image.tag | string | `"latest"` |  |
+| image.update | object | `{"enabled":false,"filterTags":{"extract":"$ts","pattern":"^dev-[a-fA-F0-9]+-(?P<ts>.*)"},"interval":"1m0s","policy":{"numerical":{"order":"asc"}}}` | Flux Image policy & repository   |
+| image.update.enabled | bool | `false` | (REQUIRED) Enable or disable Flux Image policy |
 | image.update.filterTags | object | `{"extract":"$ts","pattern":"^dev-[a-fA-F0-9]+-(?P<ts>.*)"}` | Image policy - https://fluxcd.io/docs/components/image/imagepolicies/ |
 | image.update.filterTags.pattern | string | `"^dev-[a-fA-F0-9]+-(?P<ts>.*)"` | ${PREFIX}-${GIT_SHA:0:7}-$(date +%s) |
 | image.update.interval | string | `"1m0s"` | Image repository - https://fluxcd.io/docs/components/image/imagerepositories/ |
@@ -37,11 +38,11 @@ A Helm chart for Kubernetes
 | ingress.http[0].path | string | `"/app/*"` |  |
 | ingress.http[0].pathType | string | `"prefix"` |  |
 | ingress.http[0].port | int | `80` | Backend port |
-| name | string | `"app"` | Name your application |
-| namespace | string | `"app"` | Namespace the application will be deployed in |
+| name | string | `"app-name"` | (REQUIRED) Name your application |
+| namespace | string | `"app-namespace"` | (REQUIRED) The namespace the application will be deployed in |
 | ports | string | `nil` |  |
-| readyEndpoint | string | `"/health"` |  |
-| readyPort | int | `80` |  |
+| readyEndpoint | string | `"/health"` | (REQUIRED) Set ready endpoint |
+| readyPort | int | `80` | (REQUIRED) Set ready port |
 | replicaCount | int | `1` | Replica count of pods |
 | resources.limits | object | `{"cpu":"0.5","memory":"256Mi"}` | Set resource limits |
 | resources.requests | object | `{"cpu":"0.25","memory":"128Mi"}` | Set resource requests |
