@@ -1,17 +1,10 @@
-# Default values for app.
-# This is a YAML-formatted file.
-# Declare variables to be passed into your templates. 
-
+# -- Namespace the application will be deployed in
 namespace: app
+
+# -- Name your application
 name: app
 
-# By default `component` will be equal to `{{ .Values.name }}`
-#component: my-component
-
-# By default `partOf` will be equal to `{{ .Values.namespace }}`
-#partOf: my-system
-
-# By default `containerName` will be equal to `{{ .Values.namespace }}-{{.Values.name }}`
+# -- By default `containerName` will be equal to `{{ .Values.namespace }}-{{.Values.name }}`
 containerName:
 
 ports:
@@ -19,20 +12,27 @@ ports:
 #    port: 80
 #    targetPort: 80
 
+healthEndpoint: /health
+healthPort: 80
+
+readyEndpoint: /health
+readyPort: 80
+
 image:
+  # -- Image repository
   repository: "ubuntu"
+  # -- Image version
   tag: latest
+  # -- Always, IfNotPresent or Never
   pullPolicy: IfNotPresent
-  # Flux Image policy & repository  
-  update: 
+  # -- Flux Image policy & repository  
+  update:
     enabled: true
-    # Image repository
-    # https://fluxcd.io/docs/components/image/imagerepositories/
+    # -- Image repository - https://fluxcd.io/docs/components/image/imagerepositories/
     interval: 1m0s
-    # Image policy
-    # https://fluxcd.io/docs/components/image/imagepolicies/
+    # -- Image policy - https://fluxcd.io/docs/components/image/imagepolicies/
     filterTags:
-      # ${PREFIX}-${GIT_SHA:0:7}-$(date +%s)
+      # -- ${PREFIX}-${GIT_SHA:0:7}-$(date +%s)
       pattern: '^dev-[a-fA-F0-9]+-(?P<ts>.*)'
       extract: '$ts'
     policy:
@@ -40,47 +40,57 @@ image:
         order: asc
 
 resources:
+  # -- Set resource requests
   requests:
     memory: "128Mi"
     cpu: "0.25"
+  # -- Set resource limits
   limits:
     memory: "256Mi"
     cpu: "0.5"
 
+# -- Replica count of pods
 replicaCount: 1
 
-# The name of the certificate used on the listener on the application gateway
-# This certificate and listener is not created by this chart
-applicationGatewayCertName: cert-appgw-listener
-
 ingress:
+  # -- Enable or disable ingress
   enabled: false
-  host: your.hostname.io
+  # -- Set your hostname
+  host:
+  # -- The name of the certificate used on the listener on the application gateway
+  applicationGatewayCertName:
   http:
     - path: /app/*
       pathType: prefix
+      # -- Backend port
       port:  80
 
 # Prerequisites:
 # - Create User Assigned Identity for your app and give it appropriate permissions.
 aadpodidentity:
+  # -- Enable or disable AAD Pod Identity
   enabled: false
-  # 0 = User Assigned Managed Identity, 1 = Service Principal with client secret, 2 = Service Principal with certificate
+  # -- 0 = User Assigned Managed Identity, 1 = Service Principal with client secret, 2 = Service Principal with certificate
   type: 0 
-  # Resource ID for the Managed Identity (az identity show --name <name> --resource-group <resource-group> --query id)
-  resourceID: /subscriptions/<subscription id>/resourceGroups/<resource-group id>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/<mi-name>
-  # Client ID for the Managed Identity (az identity show --name <name> --resource-group <resource-group> --query clientId)
-  clientID: 00000000-0000-0000-0000-000000000000
+  # -- Resource ID for the Managed Identity (az identity show --name <name> --resource-group <resource-group> --query id)
+  resourceID: 
+  # -- Client ID for the Managed Identity (az identity show --name <name> --resource-group <resource-group> --query clientId)
+  clientID: 
 
   # Azure Key Vault CSI-driver
   # Needs AAD Pod Identity
   akvcsidriver:
+    # -- Enable or disable Azure Key Vault CSI Driver
     enabled: false
     provider: azure
-    usePodIdentity: true               # Set to true for using aad-pod-identity to access your key vault
-    keyvaultName: your-key-vault-name  # Set to the name of your key vault
-    cloudName: AzurePublicCloud        # [OPTIONAL for Azure] if not provided, the Azure environment defaults to AzurePublicCloud
-    tenantId: your-tenant-id           # The tenant ID of the key vault
+    # -- Set to true for using aad-pod-identity to access your key vault
+    usePodIdentity: true              
+    # -- Set to the name of your key vault
+    keyvaultName:                      
+    # -- [OPTIONAL for Azure] if not provided, the Azure environment defaults to AzurePublicCloud
+    cloudName: AzurePublicCloud        
+    # -- The tenant ID of the key vault
+    tenantId:                          
     
     # These MUST reflect the objects in the array below. objectName = objectName in the array.
     # This will use the mounted secrets and create k8s secrets which you can use for environment variables.
@@ -146,10 +156,3 @@ envVars:
   #    secretKeyRef:
   #      name: app-secret1
   #      key: tls-key
-
-    
-healthEndpoint: /health
-healthPort: 80
-
-readyEndpoint: /health
-readyPort: 80
