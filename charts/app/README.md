@@ -1,6 +1,6 @@
 # app
 
-![Version: 0.6.0](https://img.shields.io/badge/Version-0.6.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.0.0](https://img.shields.io/badge/AppVersion-1.0.0-informational?style=flat-square)
+![Version: 0.5.7](https://img.shields.io/badge/Version-0.5.7-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.0.0](https://img.shields.io/badge/AppVersion-1.0.0-informational?style=flat-square)
 
 A Helm chart for Kubernetes
 
@@ -11,17 +11,9 @@ A Helm chart for Kubernetes
 | aadpodidentity.akvcsidriver.cloudName | string | `"AzurePublicCloud"` | [OPTIONAL for Azure] if not provided, the Azure environment defaults to AzurePublicCloud |
 | aadpodidentity.akvcsidriver.enabled | bool | `false` | Enable or disable Azure Key Vault CSI Driver |
 | aadpodidentity.akvcsidriver.keyvaultName | string | `nil` | Set to the name of your key vault |
+| aadpodidentity.akvcsidriver.objects | string | `nil` |  |
 | aadpodidentity.akvcsidriver.provider | string | `"azure"` |  |
-| aadpodidentity.akvcsidriver.secretObjects[0].key | string | `"secret-key-name"` |  |
-| aadpodidentity.akvcsidriver.secretObjects[0].objectName | string | `"key1"` |  |
-| aadpodidentity.akvcsidriver.secretObjects[0].objectType | string | `"secret"` |  |
-| aadpodidentity.akvcsidriver.secretObjects[0].secretName | string | `"app-key1"` |  |
-| aadpodidentity.akvcsidriver.secretObjects[0].type | string | `"Opaque"` |  |
-| aadpodidentity.akvcsidriver.secretObjects[1].key | string | `"tls-key"` |  |
-| aadpodidentity.akvcsidriver.secretObjects[1].objectName | string | `"secret1"` |  |
-| aadpodidentity.akvcsidriver.secretObjects[1].objectType | string | `"key"` |  |
-| aadpodidentity.akvcsidriver.secretObjects[1].secretName | string | `"app-secret1"` |  |
-| aadpodidentity.akvcsidriver.secretObjects[1].type | string | `"kubernetes.io/tls"` |  |
+| aadpodidentity.akvcsidriver.secretObjects | string | `nil` |  |
 | aadpodidentity.akvcsidriver.tenantId | string | `nil` | The tenant ID of the key vault |
 | aadpodidentity.akvcsidriver.usePodIdentity | bool | `true` | Set to true for using aad-pod-identity to access your key vault |
 | aadpodidentity.clientID | string | `nil` |  |
@@ -30,13 +22,13 @@ A Helm chart for Kubernetes
 | aadpodidentity.type | int | `0` | 0 = User Assigned Managed Identity, 1 = Service Principal with client secret, 2 = Service Principal with certificate |
 | containerName | string | `nil` | By default `containerName` will be equal to `{{ .Values.namespace }}-{{.Values.name }}` |
 | envVars | string | `nil` |  |
-| healthEndpoint | REQUIRED | `"/health"` | Set health endpoint |
-| healthPort | REQUIRED | `80` | Set health port |
+| healthEndpoint | string | `"/health"` | (REQUIRED) Set health endpoint |
+| healthPort | int | `80` | (REQUIRED) Set health port |
 | image.pullPolicy | string | `"IfNotPresent"` | Always, IfNotPresent or Never |
 | image.repository | string | `"ubuntu"` |  |
 | image.tag | string | `"latest"` |  |
-| image.update | object | `{"enabled":false,"filterTags":{"extract":"$ts","pattern":"^dev-[a-fA-F0-9]+-(?P<ts>.*)"},"interval":"1m0s","policy":{"numerical":{"order":"asc"}}}` | Flux Image policy & repository |
-| image.update.enabled | REQUIRED | `false` | Enable or disable Flux Image policy |
+| image.update | object | `{"enabled":false,"filterTags":{"extract":"$ts","pattern":"^dev-[a-fA-F0-9]+-(?P<ts>.*)"},"interval":"1m0s","policy":{"numerical":{"order":"asc"}}}` | Flux Image policy & repository   |
+| image.update.enabled | bool | `false` | (REQUIRED) Enable or disable Flux Image policy |
 | image.update.filterTags | object | `{"extract":"$ts","pattern":"^dev-[a-fA-F0-9]+-(?P<ts>.*)"}` | Image policy - https://fluxcd.io/docs/components/image/imagepolicies/ |
 | image.update.filterTags.pattern | string | `"^dev-[a-fA-F0-9]+-(?P<ts>.*)"` | ${PREFIX}-${GIT_SHA:0:7}-$(date +%s) |
 | image.update.interval | string | `"1m0s"` | Image repository - https://fluxcd.io/docs/components/image/imagerepositories/ |
@@ -46,14 +38,14 @@ A Helm chart for Kubernetes
 | ingress.http[0].path | string | `"/app/*"` |  |
 | ingress.http[0].pathType | string | `"prefix"` |  |
 | ingress.http[0].port | int | `80` | Backend port |
-| name | REQUIRED | `"app-name"` | Name your application |
-| namespace | REQUIRED | `"app-namespace"` | The namespace the application will be deployed in |
+| name | string | `"app-name"` | (REQUIRED) Name your application |
+| namespace | string | `"app-namespace"` | (REQUIRED) The namespace the application will be deployed in |
 | ports | string | `nil` |  |
-| readyEndpoint | REQUIRED | `"/health"` | Set ready endpoint |
-| readyPort | REQUIRED | `80` | Set ready port |
+| readyEndpoint | string | `"/health"` | (REQUIRED) Set ready endpoint |
+| readyPort | int | `80` | (REQUIRED) Set ready port |
 | replicaCount | int | `1` | Replica count of pods |
 | resources.limits | object | `{"cpu":"0.5","memory":"256Mi"}` | Set resource limits |
 | resources.requests | object | `{"cpu":"0.25","memory":"128Mi"}` | Set resource requests |
 
 ----------------------------------------------
-Autogenerated from chart metadata using [helm-docs v1.10.0](https://github.com/norwoodj/helm-docs/releases/v1.10.0)
+Autogenerated from chart metadata using [helm-docs v1.8.1](https://github.com/norwoodj/helm-docs/releases/v1.8.1)
