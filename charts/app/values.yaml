@@ -64,6 +64,7 @@ ingress:
   host:
   # -- The name of the certificate used on the listener on the application gateway
   applicationGatewayCertName:
+  # -- Default request timeout https://azure.github.io/application-gateway-kubernetes-ingress/annotations/#request-timeout
   timeout: 30
   http:
     - path: /app/*
