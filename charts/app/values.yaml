@@ -29,7 +29,7 @@ image:
   tag: latest
   # -- Always, IfNotPresent or Never
   pullPolicy: IfNotPresent
-  # -- Flux Image policy & repository  
+  # -- Flux Image policy & repository
   update:
     # -- (REQUIRED) Enable or disable Flux Image policy
     enabled: false
@@ -38,8 +38,8 @@ image:
     # -- Image policy - https://fluxcd.io/docs/components/image/imagepolicies/
     filterTags:
       # -- ${PREFIX}-${GIT_SHA:0:7}-$(date +%s)
-      pattern: '^dev-[a-fA-F0-9]+-(?P<ts>.*)'
-      extract: '$ts'
+      pattern: "^dev-[a-fA-F0-9]+-(?P<ts>.*)"
+      extract: "$ts"
     policy:
       numerical:
         order: asc
@@ -64,11 +64,12 @@ ingress:
   host:
   # -- The name of the certificate used on the listener on the application gateway
   applicationGatewayCertName:
+  timeout: 30
   http:
     - path: /app/*
       pathType: prefix
       # -- Backend port
-      port:  80
+      port: 80
 
 # Prerequisites:
 # - Create User Assigned Identity for your app and give it appropriate permissions.
@@ -76,11 +77,11 @@ aadpodidentity:
   # -- Enable or disable AAD Pod Identity
   enabled: false
   # -- 0 = User Assigned Managed Identity, 1 = Service Principal with client secret, 2 = Service Principal with certificate
-  type: 0 
+  type: 0
   # -- Resource ID for the Managed Identity (az identity show --name <name> --resource-group <resource-group> --query id)
-  resourceID: 
+  resourceID:
   # -- Client ID for the Managed Identity (az identity show --name <name> --resource-group <resource-group> --query clientId)
-  clientID: 
+  clientID:
 
   # Azure Key Vault CSI-driver
   # Needs AAD Pod Identity
@@ -89,14 +90,14 @@ aadpodidentity:
     enabled: false
     provider: azure
     # -- Set to true for using aad-pod-identity to access your key vault
-    usePodIdentity: true              
+    usePodIdentity: true
     # -- Set to the name of your key vault
-    keyvaultName:                      
+    keyvaultName:
     # -- [OPTIONAL for Azure] if not provided, the Azure environment defaults to AzurePublicCloud
-    cloudName: AzurePublicCloud        
+    cloudName: AzurePublicCloud
     # -- The tenant ID of the key vault
-    tenantId:                          
-    
+    tenantId:
+
     # These MUST reflect the objects in the array below. objectName = objectName in the array.
     # This will use the mounted secrets and create k8s secrets which you can use for environment variables.
     # You can create multiple secret objects in one secret.
@@ -129,7 +130,8 @@ aadpodidentity:
       #  objectName: cert1
       #  key: tls-key
       #  type: kubernetes.io/tls
-    objects: #|
+    objects:
+      # | <objects: | >
       #array:
       #  - |
       #    objectName: secret1
