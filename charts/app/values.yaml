@@ -77,6 +77,8 @@ ingress:
 aadpodidentity:
   # -- Enable or disable AAD Pod Identity
   enabled: false
+  # -- Use existing AzureIdentityBinding, Will will suppress creation of AadPodIdentity and AzureIdentityBinding
+  selector:
   # -- 0 = User Assigned Managed Identity, 1 = Service Principal with client secret, 2 = Service Principal with certificate
   type: 0
   # -- Resource ID for the Managed Identity (az identity show --name <name> --resource-group <resource-group> --query id)

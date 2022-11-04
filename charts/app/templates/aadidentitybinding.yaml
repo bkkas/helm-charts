@@ -1,4 +1,4 @@
-{{- if .Values.aadpodidentity.enabled }}
+{{- if and (.Values.aadpodidentity.enabled) (not .Values.aadpodidentity.selector) }}
 apiVersion: aadpodidentity.k8s.io/v1
 kind: AzureIdentityBinding
 metadata:
