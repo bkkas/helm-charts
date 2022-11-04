@@ -27,7 +27,11 @@ spec:
       labels:
         app: {{ .Values.name }}
         {{- if .Values.aadpodidentity.enabled }}
+        {{- if .Values.aadpodidentity.selector }}
+        aadpodidbinding: {{ .Values.aadpodidentity.selector  }}
+        {{- else }}
         aadpodidbinding: "{{ .Values.name }}-identity"
+        {{- end }}
         {{- end }}
     spec:
       {{- if .Values.aadpodidentity.akvcsidriver.enabled }}
