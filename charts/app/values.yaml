@@ -22,6 +22,9 @@ readyEndpoint: /health
 # -- (REQUIRED) Set ready port
 readyPort: 80
 
+# -- (Optional) Add pod labels
+podLabels: []
+
 image:
   # (REQUIRED) -- Image repository
   repository: "ubuntu"
