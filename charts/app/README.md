@@ -1,6 +1,6 @@
 # app
 
-![Version: 0.5.11](https://img.shields.io/badge/Version-0.5.11-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.0.0](https://img.shields.io/badge/AppVersion-1.0.0-informational?style=flat-square)
+![Version: 0.5.12](https://img.shields.io/badge/Version-0.5.12-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.0.0](https://img.shields.io/badge/AppVersion-1.0.0-informational?style=flat-square)
 
 A Helm chart for Kubernetes
 
@@ -21,6 +21,7 @@ A Helm chart for Kubernetes
 | aadpodidentity.resourceID | string | `nil` |  |
 | aadpodidentity.selector | string | `nil` | Use existing AzureIdentityBinding, Will will suppress creation of AadPodIdentity and AzureIdentityBinding |
 | aadpodidentity.type | int | `0` | 0 = User Assigned Managed Identity, 1 = Service Principal with client secret, 2 = Service Principal with certificate |
+| affinity | Optional | `{"nodeAffinity":{"preferredDuringSchedulingIgnoredDuringExecution":[{"preference":{"matchExpressions":[{"key":"kubernetes.azure.com/mode","operator":"In","values":["User"]}]},"weight":1}]}}` | Affinity rules |
 | containerName | string | `nil` | By default `containerName` will be equal to `{{ .Values.namespace }}-{{.Values.name }}` |
 | envVars | string | `nil` |  |
 | healthEndpoint | REQUIRED | `"/health"` | Set health endpoint |
