@@ -33,6 +33,9 @@ spec:
         aadpodidbinding: "{{ .Values.name }}-identity"
         {{- end }}
         {{- end }}
+        {{- if .Values.podLabels }}
+        {{- toYaml $.Values.podLabels | nindent 8 }}
+        {{- end }}
     spec:
       {{- if .Values.aadpodidentity.akvcsidriver.enabled }}
       volumes:
