@@ -25,6 +25,18 @@ readyPort: 80
 # -- (Optional) Add pod labels
 podLabels: []
 
+# -- (Optional) Affinity rules
+affinity:
+  nodeAffinity:
+    preferredDuringSchedulingIgnoredDuringExecution:
+    - weight: 1
+      preference:
+        matchExpressions:
+        - key: kubernetes.azure.com/mode
+          operator: In
+          values:
+          - User
+
 image:
   # (REQUIRED) -- Image repository
   repository: "ubuntu"
