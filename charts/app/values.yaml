@@ -35,7 +35,7 @@ affinity:
         - key: kubernetes.azure.com/mode
           operator: In
           values:
-          - User
+          - user
 
 image:
   # (REQUIRED) -- Image repository
