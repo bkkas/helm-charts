@@ -13,6 +13,16 @@ entries:
     version: 0.6.0
   - apiVersion: v2
     appVersion: 1.0.0
+    created: "2022-11-08T13:30:17.377033908Z"
+    description: A Helm chart for Kubernetes
+    digest: 211dc8ebca99e192121f3f590699ed07b269ccd10c777ef5af804e1af6eaed8c
+    name: app
+    type: application
+    urls:
+    - https://github.com/bkkas/helm-charts/releases/download/app-0.5.13/app-0.5.13.tgz
+    version: 0.5.13
+  - apiVersion: v2
+    appVersion: 1.0.0
     created: "2022-11-08T13:21:11.287213335Z"
     description: A Helm chart for Kubernetes
     digest: 7cc86ac801f7a68795de1b39e3d6cb40c3e6c4b8152988d669fbbf6a2833257f
@@ -121,4 +131,4 @@ entries:
     urls:
     - https://github.com/bkkas/helm-charts/releases/download/app-0.5.2/app-0.5.2.tgz
     version: 0.5.2
-generated: "2022-11-08T13:21:11.287266338Z"
+generated: "2022-11-08T13:30:17.377210012Z"
