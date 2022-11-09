@@ -109,54 +109,21 @@ aadpodidentity:
       #  objectName: key1
       #  key: secret-key-name
       #  type: Opaque
+      #  data:
+      #   - objectName: secret-key-name
+      #     objectType: secret
+      #     key: secret-key-name
       #- secretName: app-key1
       #  objectName: key2
       #  key: secret-key-name
       #  type: Opaque
-      #- secretName: app-key2
-      #  objectName: key3
-      #  key: secret-key-name
-      #  type: Opaque
-      #- secretName: app-secret1
-      #  objectName: secret1
-      #  key: tls-key
-      #  type: kubernetes.io/tls
-      #- secretName: app-secret1
-      #  objectName: secret2
-      #  key: tls-key
-      #  type: kubernetes.io/tls
-      #- secretName: app-secret2
-      #  objectName: secret3
-      #  key: tls-key
-      #  type: kubernetes.io/tls
-      #- secretName: app-pem-cert
-      #  objectName: cert1
-      #  key: tls-key
-      #  type: kubernetes.io/tls
-    objects:
-      # | <objects: | >
-      #array:
-      #  - |
-      #    objectName: secret1
-      #    objectType: secret
-      #  - |
-      #    objectName: secret2
-      #    objectType: secret
-      #  - |
-      #    objectName: secret3
-      #    objectType: secret
-      #  - |
-      #    objectName: key1
-      #    objectType: key
-      #  - |
-      #    objectName: key2
-      #    objectType: key
-      #  - |
-      #    objectName: key3
-      #    objectType: key
-      #  - |
-      #    objectName: cert1
-      #    objectType: cert
+      #  data:
+      #   - objectName: secret-key-name
+      #     objectType: secret
+      #     key: secret-key-name
+      #   - objectName: secret-key2-name
+      #     objectType: secret
+      #     key: secret-key2-name
 
 envVars:
   #- name: ENV1
