@@ -22,6 +22,21 @@ readyEndpoint: /health
 # -- (REQUIRED) Set ready port
 readyPort: 80
 
+# -- (Optional) Add pod labels
+podLabels: []
+
+# -- (Optional) Affinity rules
+affinity:
+  nodeAffinity:
+    preferredDuringSchedulingIgnoredDuringExecution:
+    - weight: 1
+      preference:
+        matchExpressions:
+        - key: kubernetes.azure.com/mode
+          operator: In
+          values:
+          - user
+
 image:
   # (REQUIRED) -- Image repository
   repository: "ubuntu"

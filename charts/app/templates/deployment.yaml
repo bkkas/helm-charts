@@ -33,7 +33,11 @@ spec:
         aadpodidbinding: "{{ .Values.name }}-identity"
         {{- end }}
         {{- end }}
+        {{- if .Values.podLabels }}
+        {{- toYaml $.Values.podLabels | nindent 8 }}
+        {{- end }}
     spec:
+      affinity: {{ toYaml .Values.affinity | nindent 8 }}
       {{- if .Values.aadpodidentity.akvcsidriver.enabled }}
       volumes:
         - name: secrets-store
