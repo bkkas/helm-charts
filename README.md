@@ -22,3 +22,7 @@ To install the <chart-name> chart:
 To uninstall the chart:
 
     helm delete my-<chart-name>
+
+## Lint of charts
+
+There is a github action that run chart lint.
