@@ -29,13 +29,13 @@ podLabels: []
 affinity:
   nodeAffinity:
     preferredDuringSchedulingIgnoredDuringExecution:
-    - weight: 1
-      preference:
-        matchExpressions:
-        - key: kubernetes.azure.com/mode
-          operator: In
-          values:
-          - user
+      - weight: 1
+        preference:
+          matchExpressions:
+            - key: kubernetes.azure.com/mode
+              operator: In
+              values:
+                - user
 
 image:
   # (REQUIRED) -- Image repository
@@ -120,31 +120,31 @@ aadpodidentity:
     # This will use the mounted secrets and create k8s secrets which you can use for environment variables.
     # You can create multiple secret objects in one secret.
     secretObjects:
-      #- secretName: app-key1
-      #  objectName: key1
-      #  key: secret-key-name
-      #  type: Opaque
-      #  data:
-      #   - objectName: secret-key-name
-      #     objectType: secret
-      #     key: secret-key-name
-      #- secretName: app-key1
-      #  objectName: key2
-      #  key: secret-key-name
-      #  type: Opaque
-      #  data:
-      #   - objectName: secret-key-name
-      #     objectType: secret
-      #     key: secret-key-name
-      #   - objectName: secret-key2-name
-      #     objectType: secret
-      #     key: secret-key2-name
+      # - secretName: app-key1
+      #   objectName: key1
+      #   key: secret-key-name
+      #   type: Opaque
+      #   data:
+      #    - objectName: secret-key-name
+      #      objectType: secret
+      #      key: secret-key-name
+      # - secretName: app-key1
+      #   objectName: key2
+      #   key: secret-key-name
+      #   type: Opaque
+      #   data:
+      #    - objectName: secret-key-name
+      #      objectType: secret
+      #      key: secret-key-name
+      #    - objectName: secret-key2-name
+      #      objectType: secret
+      #      key: secret-key2-name
 
 envVars:
-  #- name: ENV1
-  #  value: ENV1-VALUE
-  #- name: ENV2
-  #  valueFrom:
-  #    secretKeyRef:
-  #      name: app-secret1
-  #      key: tls-key
+  # - name: ENV1
+  #   value: ENV1-VALUE
+  # - name: ENV2
+  #   valueFrom:
+  #     secretKeyRef:
+  #       name: app-secret1
+  #       key: tls-key
