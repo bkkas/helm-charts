@@ -4,4 +4,4 @@ chart-dirs:
   - charts
 chart-repos:
   - bkkas=https://bkkas.github.io/helm-charts
-helm-extra-args: --timeout 600
+helm-extra-args: --timeout 600s
