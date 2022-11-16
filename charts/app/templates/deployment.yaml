@@ -38,15 +38,20 @@ spec:
         {{- end }}
     spec:
       affinity: {{ toYaml .Values.affinity | nindent 8 }}
-      {{- if .Values.aadpodidentity.akvcsidriver.enabled }}
+
       volumes:
+        {{- if .Values.volumes }}
+        {{- toYaml .Values.volumes | nindent 8 }}
+        {{- end }}
+        {{- if .Values.aadpodidentity.akvcsidriver.enabled }}   
         - name: secrets-store
           csi:
             driver: secrets-store.csi.k8s.io
             readOnly: true
             volumeAttributes:
               secretProviderClass: "{{ .Values.name }}-akvcsistore"
-      {{- end }}
+        {{- end }}
+      
       containers:
       - name: {{ default (printf "%s-%s" .Values.namespace .Values.name) .Values.containerName | quote }}
         image: {{ printf "%s:%s" .Values.image.repository .Values.image.tag | quote }}
@@ -87,14 +92,16 @@ spec:
           {{- end }}
           {{- end }}
         {{- end }}
-
-        {{- if .Values.aadpodidentity.akvcsidriver.enabled }}
+        
         volumeMounts:
+          {{- if .Values.volumeMounts }}
+          {{- toYaml .Values.volumeMounts | nindent 10 }}
+          {{- end }}
+          {{- if .Values.aadpodidentity.akvcsidriver.enabled }}
           - name: secrets-store
             mountPath: "/mnt/secrets-store"
             readOnly: true
-        {{- end }}
-
+          {{- end }}
         livenessProbe:
           httpGet:
             path: {{ .Values.healthEndpoint | quote }}
