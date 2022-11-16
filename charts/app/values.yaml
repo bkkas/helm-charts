@@ -148,3 +148,16 @@ envVars:
   #     secretKeyRef:
   #       name: app-secret1
   #       key: tls-key
+
+volumes:
+# - name: secrets-store
+#   csi:
+#     driver: secrets-store.csi.k8s.io
+#     readOnly: true
+#     volumeAttributes:
+#       secretProviderClass: "{{ .Values.name }}-akvcsistore"
+
+volumeMounts:
+# - name: secrets-store
+#   mountPath: "/mnt/secrets-store"
+#   readOnly: true
