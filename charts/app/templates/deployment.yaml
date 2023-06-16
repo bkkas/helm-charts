@@ -106,11 +106,11 @@ spec:
           httpGet:
             path: {{ .Values.healthEndpoint | quote }}
             port: {{ .Values.healthPort }}
-          initialDelaySeconds: 3
-          periodSeconds: 5
+          initialDelaySeconds: {{ .Values.healthInitialDelaySeconds }}
+          periodSeconds: {{ .Values.healthPeriodSeconds }}
         readinessProbe:
           httpGet:
             path: {{ .Values.readyEndpoint | quote }}
             port: {{ .Values.readyPort }}
-          initialDelaySeconds: 5
-          periodSeconds: 10
+          initialDelaySeconds: {{ .Values.readyInitialDelaySeconds }}
+          periodSeconds: {{ .Values.readyPeriodSeconds }}

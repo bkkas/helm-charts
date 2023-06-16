@@ -17,10 +17,16 @@ healthEndpoint: /health
 # -- (REQUIRED) Set health port
 healthPort: 80
 
+healthInitialDelaySeconds: 3
+healthPeriodSeconds: 5
+
 # -- (REQUIRED) Set ready endpoint
 readyEndpoint: /health
 # -- (REQUIRED) Set ready port
 readyPort: 80
+
+readyInitialDelaySeconds: 5
+readyPeriodSeconds: 10
 
 # -- (Optional) Add pod labels
 podLabels: []
