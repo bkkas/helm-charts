@@ -3,14 +3,14 @@ appVersion: 1.0.0
 description: A Helm chart for Kubernetes
 name: app
 type: application
-version: 0.6.1
+version: 0.6.2
 maintainers:
   - name: tomsolem
     email: tom.solem@eviny.no
     url: https://github.com/tomsolem
-  - name: ah9828
+  - name: ahm81
     email: amund.meling@eviny.no
-    url: https://github.com/ah9828
+    url: https://github.com/ahm81
   - name: ole-bkk
     email: ole.nes@eviny.no
     url: https://github.com/ole-bkk
