@@ -3,6 +3,26 @@ entries:
   app:
   - apiVersion: v2
     appVersion: 1.0.0
+    created: "2023-06-16T12:06:22.115536563Z"
+    description: A Helm chart for Kubernetes
+    digest: 7a28a5ab00fce8c1ef290051acd2bcf695fea2ebbdeb646476216d46de0d33d8
+    maintainers:
+    - email: tom.solem@eviny.no
+      name: tomsolem
+      url: https://github.com/tomsolem
+    - email: amund.meling@eviny.no
+      name: ahm81
+      url: https://github.com/ahm81
+    - email: ole.nes@eviny.no
+      name: ole-bkk
+      url: https://github.com/ole-bkk
+    name: app
+    type: application
+    urls:
+    - https://github.com/bkkas/helm-charts/releases/download/app-0.6.2/app-0.6.2.tgz
+    version: 0.6.2
+  - apiVersion: v2
+    appVersion: 1.0.0
     created: "2022-11-16T08:12:07.311051649Z"
     description: A Helm chart for Kubernetes
     digest: 7688288833893dd2de34ccb413126110a827900ceaf8103a69d8da12644dde77
@@ -151,4 +171,4 @@ entries:
     urls:
     - https://github.com/bkkas/helm-charts/releases/download/app-0.5.2/app-0.5.2.tgz
     version: 0.5.2
-generated: "2022-11-16T08:12:07.311243349Z"
+generated: "2023-06-16T12:06:22.115637968Z"
