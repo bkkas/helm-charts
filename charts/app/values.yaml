@@ -8,9 +8,10 @@ name: app-name
 containerName:
 
 ports:
-#  - name: http
+#  - name: http-web-svc
 #    protocol: TCP
 #    servicePort: 80
+#    servicePortName: name-of-service-port
 #    containerPort: 80
 
 # -- (REQUIRED) Set health endpoint
