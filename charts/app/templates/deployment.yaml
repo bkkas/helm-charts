@@ -72,8 +72,8 @@ spec:
         {{- if .Values.ports }}
         ports:
         {{- range .Values.ports }}
-        - protocol: {{ .protocol | upper }}
-          containerPort: {{ .targetPort }}
+        - containerPort: {{ .containerPort }}
+          name: {{ .name }}
         {{- end }}
         {{- end }}
 

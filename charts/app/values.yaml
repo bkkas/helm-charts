@@ -8,9 +8,10 @@ name: app-name
 containerName:
 
 ports:
-#  - protocol: TCP
-#    port: 80
-#    targetPort: 80
+#  - name: http
+#    protocol: TCP
+#    servicePort: 80
+#    containerPort: 80
 
 # -- (REQUIRED) Set health endpoint
 healthEndpoint: /health
