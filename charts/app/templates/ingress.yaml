@@ -24,7 +24,11 @@ spec:
           service:
             name: {{ $.Values.name }}
             port:
+              {{- if .name }}
+              name: {{ .name }}
+              {{- else }}
               number: {{ .port }}
+              {{- end }}
       {{- end }}
   {{- end }}
 {{- end }}

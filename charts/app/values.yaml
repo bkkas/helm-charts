@@ -92,7 +92,10 @@ ingress:
   http:
     - path: /app/*
       pathType: prefix
-      # -- Backend port
+      # Default use Service backend port name else use port number
+      # -- Service backend port name (ref)
+      # name: http-svc
+      # -- Service Backend port (number)
       port: 80
 
 # Prerequisites:
