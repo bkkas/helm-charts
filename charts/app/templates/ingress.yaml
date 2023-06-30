@@ -7,7 +7,7 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: azure/application-gateway
     appgw.ingress.kubernetes.io/appgw-ssl-certificate: {{ .Values.ingress.applicationGatewayCertName }}
-    {{ if (default .Values.ingress.sslRedirect true) }}
+    {{ if .Values.ingress.sslRedirect }}
     appgw.ingress.kubernetes.io/ssl-redirect: "true"
     {{ end }}
     appgw.ingress.kubernetes.io/backend-path-prefix: "/"
