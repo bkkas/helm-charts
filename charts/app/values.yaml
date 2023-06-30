@@ -83,6 +83,8 @@ replicaCount: 1
 ingress:
   # -- Enable or disable ingress
   enabled: false
+  # -- Enable or disable ssl redirect
+  sslRedirect: false
   # -- Set your hostname
   host:
   # -- The name of the certificate used on the listener on the application gateway
