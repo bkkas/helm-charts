@@ -13,6 +13,7 @@ metadata:
     appgw.ingress.kubernetes.io/backend-path-prefix: "/"
     appgw.ingress.kubernetes.io/override-frontend-port: "443"
     appgw.ingress.kubernetes.io/connection-draining-timeout: {{ .Values.ingress.timeout | quote }}
+    appgw.ingress.kubernetes.io/request-timeout: {{ .Values.ingress.requst-timeout | default "30" | quote }}
 spec:
   rules:
   {{- with .Values.ingress }}
