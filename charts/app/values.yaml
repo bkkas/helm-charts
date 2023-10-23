@@ -92,7 +92,7 @@ ingress:
   # -- Default request timeout https://azure.github.io/application-gateway-kubernetes-ingress/annotations/#request-timeout
   timeout: 30
   # -- Default backend request timeout https://azure.github.io/application-gateway-kubernetes-ingress/annotations/#request-timeout
-  requst-timeout: 30
+  requstTimeout: 30
   http:
     - path: /app/*
       pathType: prefix
